@@ -1,12 +1,19 @@
 image: node:20
 
 stages:
-  - test
+  - install
+  - lint
 
-before_script:
-  - npm ci
+cache:
+  paths:
+    - node_modules/
 
-testes:
-  stage: test
+install_dependencies:
+  stage: install
   script:
-    - npm test
+    - npm ci
+
+eslint:
+  stage: lint
+  script:
+    - npx eslint .
